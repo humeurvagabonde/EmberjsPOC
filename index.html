@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Emberjs POC</title>
+  
+  <!-- integrer head.js -->
+
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="./css/app.css">
+
+  
+</head>
+<body>
+
+	<div class="navbar navbar-fixed-top navbar-inverse">
+	  <div class="navbar-inner">
+		  <div class="container">
+		    <a class="brand" href="/ember">Emberjs POC</a>
+        <ul class="nav">
+          <a href="/ember/#/instructors" >Instructors</a>
+          <a href="/ember/#/disciplines" >Disciplines</a>
+        </ul>
+      </div>
+    </div>
+	</div>
+
+  <div id="content">
+  </div>
+
+<script type="text/x-handlebars" data-template-name="application">
+	<div class="hero-unit">
+	  <div class="container">
+	    <h1>Ember.js</h1>
+		  <p>Gestion des charges d'enseignements</p>
+	  </div>
+	</div>
+
+	<div class="container">
+	  <h1>Ember Committers</h1>
+	  {{outlet}}
+	</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="navigation">
+	<div class="navbar navbar-fixed-top navbar-inverse">
+	  <div class="navbar-inner">
+		  <div class="container">
+		    <a class="brand" href="#">Emberjs POC</a>
+        <ul class="nav">
+          {{#view view.navItemView item="allInstructors" }}
+            <a {{action gotoAllInstructors}} >Instructors</a>
+          {{/view}}
+          {{#view view.navItemView item="allDisciplines" }}
+            <a {{action gotoAllDisciplines }} >Disciplines</a>
+          {{/view}}     
+        </ul>
+      </div>
+    </div>
+	</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="navigation-00">
+	<div class="navbar navbar-fixed-top navbar-inverse">
+	  <div class="navbar-inner">
+		  <div class="container">
+		    <a class="brand" href="#">Emberjs POC</a>
+        <ul class="nav">
+          {{#collection contentBinding="controller"
+                        itemTagName="li"}}
+            <a {{action view.content.action}} >{{view.content.selection}}</a>
+          {{/collection}}   
+        </ul>
+      </div>
+    </div>
+	</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="home">
+Home sweet home
+</script>
+
+<script type="text/x-handlebars" data-template-name="allInstructors">
+
+  <table class="table table-striped">
+    {{#each person in controller itemIndex='index'}}
+      <tr>
+        <td>{{person.login}}</td>
+      </tr>
+    {{/each}}
+  </table>
+</script>
+
+<script type="text/x-handlebars" data-template-name="allDisciplines">
+Tous les cours : 
+</script>
+
+  <script type='text/javascript' src='./js/lib/jquery-1.7.2.js'></script>
+  <script type='text/javascript' src='./js/lib/handlebars-1.0.rc.1.js'></script>
+  <script type='text/javascript' src='./js/lib/ember-latest.js'></script> 
+  <script type='text/javascript' src='./js/appCktl.js'></script>
+</body>
+
+</html>
